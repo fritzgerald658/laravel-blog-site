@@ -21,7 +21,7 @@
 <body>
     <div class="navbar bg-base-100">
         <div class="flex-1">
-            <span class="btn btn-ghost text-xl">Bloggerist</a>
+            <a href="{{ route('blog.dashboard') }}" class="btn btn-ghost text-xl">Bloggerist</a>
         </div>
         <div class="flex-none">
             <ul class="menu menu-horizontal px-1">
@@ -30,7 +30,7 @@
                     <details>
                         <summary>{{ Auth::user()->name }}</summary>
                         <ul class="bg-base-100 rounded-t-none p-2">
-                            <li><a href="{{ route('blog.profile') }}">Profile</a></li>
+                            <li><a>Profile</a></li>
                             <li>
                                 <form method="POST" action="{{ route('logout') }}">
                                     @csrf
@@ -49,27 +49,11 @@
     <div>
 
     </div>
-    <div class="flex flex-col justify-center items-center h-[50vh]">
-        <form id="add-blog" class="flex flex-col gap-2  w-[90vw] md:w-[60vw]" method="post">
-            @csrf
-            @method('post')
-            <input name="blog_title" type="text" placeholder="Title" class="input input-bordered w-[60vw]max-w-xs" />
-            <textarea name="blog_description" class="textarea textarea-bordered w-full font-sans"
-                placeholder="Type your thoughts here"></textarea>
-            <div>
-                <label class="text-sm" for="">Private</label>
-                <input type="checkbox" name="is_private" value="1">
-            </div>
-            <button type="submit" name="submit" class="btn btn-primary">Post</button>
-        </form>
-    </div>
-
 
     <div id="blog-container" class=" flex flex-col justify-center items-center gap-2">
         @foreach ($blogs as $blog)
             <div class="card bg-neutral text-white w-[90vw] md:w-[60vw]">
                 <div class="card-body">
-                    <p class="text-[0.8rem] text-gray-400">{{ $blog->is_private ? 'Private' : 'Public' }}</p>
                     <div class="border-b-[1px] border-grey py-3">
                         <p class="text-[1rem]">Author: {{ $blog->user->name }}</p>
                     </div>
@@ -80,6 +64,7 @@
             </div>
         @endforeach
     </div>
+
 
 
 

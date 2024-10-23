@@ -22,4 +22,7 @@ require __DIR__ . '/auth.php';
 
 // store blog
 Route::post('/dashboard/store', [BlogController::class, 'store'])->name('blog.store');
-Route::get('/dashboard', [BlogController::class, 'display'])->name('blog.display');
+Route::get('/dashboard', [BlogController::class, 'display'])->name('blog.dashboard');
+
+// go to my profile
+Route::get('/dashboard/profile', [BlogController::class, 'myProfile'])->name('blog.profile');

@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('blog_title');
             $table->string('blog_description');
             $table->timestamps();
-            $table->boolean('is_private');
+            $table->boolean('is_private')->default(false);
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
         });
     }

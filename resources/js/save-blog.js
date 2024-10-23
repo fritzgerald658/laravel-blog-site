@@ -17,12 +17,19 @@ function storeBlog() {
             success: function (response) {
                 $("#blog-container").prepend(
                     `<div class="card bg-neutral text-white w-[90vw] md:w-[60vw]">
-                        <div class="card-body ">
-                            <span>Author: ${response.username}</span>
-                            <h2 class="card-title">Title: ${response.blog_title}</h2>
-                            <p>Description: ${response.blog_description}</p>
+                    
+                <div class="card-body">
+                <p class="text-[0.8rem] text-gray-400">${
+                    response.is_private ? "Private" : "Public"
+                }</p>
+                    <div class="border-b-[1px] border-grey py-3">
+                        <p class="text-[1rem]">Author: ${response.username}</p>
                     </div>
-                </div>`
+
+                    <h2 class="card-title">${response.blog_title}</h2>
+                    <p class="pl-3">${response.blog_description}</p>
+                </div>
+            </div>`
                 );
                 $("#add-blog")[0].reset();
             },
