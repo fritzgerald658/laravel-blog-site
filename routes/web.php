@@ -26,3 +26,6 @@ Route::get('/dashboard', [BlogController::class, 'display'])->name('blog.dashboa
 
 // go to my profile
 Route::get('/dashboard/profile', [BlogController::class, 'myProfile'])->name('blog.profile');
+
+// see all post
+Route::get('/dashboard/blog-posts', [BlogController::class, 'allPost'])->name('blog.post');
