@@ -32,3 +32,5 @@ Route::get('/dashboard/blog-posts', [BlogController::class, 'allPost'])->name('b
 
 // udpate your post
 Route::put('/dashboard/profile/update/{id}', [BlogController::class, 'update'])->name('blog.update');
+
+Route::delete('/dashboard/profile/delete/{id}', [BlogController::class, 'delete'])->name('blog.delete');

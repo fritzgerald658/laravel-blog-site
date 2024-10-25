@@ -113,4 +113,12 @@ class BlogController extends Controller
             'success' => true
         ]);
     }
+
+    public function delete($id)
+    {
+
+        $blog = Blog::find($id);
+
+        $blog->delete();
+    }
 }

@@ -1,3 +1,5 @@
+import { data } from "autoprefixer";
+
 function setUpCsrfToken() {
     $.ajaxSetup({
         headers: {
@@ -127,6 +129,21 @@ function updateContent() {
     });
 }
 
+function deleteContent() {
+    $(".delete-content").click(function (e) {
+        const blogId = $(this).data("id");
+        e.preventDefault();
+        $.ajax({
+            type: "delete",
+            url: "profile/delete/" + blogId,
+            success: function (response) {
+                $(`#blog-container[data-id="${blogId}"]`).remove();
+                alert("data has been deleted");
+            },
+        });
+    });
+}
+
 function execute() {
     $(document).ready(function () {
         setUpCsrfToken();
@@ -134,6 +151,7 @@ function execute() {
         activateContentEditable();
         updateContent();
         cancelEdit();
+        deleteContent();
     });
 }
 
