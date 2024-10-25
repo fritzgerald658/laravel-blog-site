@@ -80,6 +80,18 @@ function activateContentEditable() {
     });
 }
 
+function cancelEdit() {
+    $(".cancel-edit").click(function (e) {
+        const blogId = $(this).data("id");
+        e.preventDefault();
+        $(`.blog-edit-container[data-id="${blogId}"]`)[0].reset();
+        $(`.blog-edit[data-id="${blogId}"]`).attr("contenteditable", "false");
+        $(`.save-edit[data-id="${blogId}"]`).addClass("hidden");
+        $(this).addClass("hidden");
+        $(".edit-content").removeClass("hidden");
+    });
+}
+
 function updateContent() {
     $(".blog-edit-container").on("submit", function (e) {
         e.preventDefault();
@@ -102,6 +114,7 @@ function updateContent() {
             success: function (response) {
                 $(".edit-content").removeClass("hidden");
                 $(".save-edit").addClass("hidden");
+                $(".cancel-edit").addClass("hidden");
             },
         });
     });
@@ -113,6 +126,7 @@ function execute() {
         storeBlog();
         activateContentEditable();
         updateContent();
+        cancelEdit();
     });
 }
 
