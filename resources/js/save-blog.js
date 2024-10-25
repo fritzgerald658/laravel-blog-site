@@ -76,6 +76,7 @@ function activateContentEditable() {
             .focus();
         $(".edit-content").addClass("hidden");
         $(`.save-edit[data-id="${blogId}"]`).removeClass("hidden");
+        $(`.cancel-edit[data-id="${blogId}"]`).removeClass("hidden");
     });
 }
 

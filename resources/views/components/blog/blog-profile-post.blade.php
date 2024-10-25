@@ -20,6 +20,8 @@
                             ago </p>
                         <button class="btn btn-primary btn-sm edit-content" data-id="{{ $blog->id }}">Edit
                             Post</button>
+                        <button class="btn btn-primary btn-sm cancel-edit hidden" data-id="{{ $blog->id }}">Cancel
+                            Edit</button>
                     </div>
                 @endif
             @elseif ($blog->created_at->isYesterday())
