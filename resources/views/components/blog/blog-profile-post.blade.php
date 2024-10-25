@@ -11,19 +11,21 @@
                     <div class="flex items-center">
                         <p class="text-[0.6rem] text-gray-400">{{ $hours_ago }} hour{{ $hours_ago > 1 ? 's' : '' }}
                             ago</p>
-                        <button class="btn btn-primary btn-sm edit-content">Edit Post</button>
+                        <button class="btn btn-primary btn-sm edit-content" data-id="{{ $blog->id }}">Edit
+                            Post</button>
                     </div>
                 @else
                     <div class="flex items-center">
                         <p class="text-[0.6rem] text-gray-400">{{ $minutes_ago }} min{{ $minutes_ago > 1 ? 's' : '' }}
                             ago </p>
-                        <button class="btn btn-primary btn-sm edit-content">Edit Post</button>
+                        <button class="btn btn-primary btn-sm edit-content" data-id="{{ $blog->id }}">Edit
+                            Post</button>
                     </div>
                 @endif
             @elseif ($blog->created_at->isYesterday())
                 <div class="flex items-center">
                     <p class="text-[0.6rem] text-gray-400">{{ $blog->created_at->format('l') }}</p>
-                    <button class="btn btn-primary btn-sm edit-content">Edit Post</button>
+                    <button class="btn btn-primary btn-sm edit-content" data-id="{{ $blog->id }}">Edit Post</button>
                 </div>
             @else
                 <div class="flex items-center">
@@ -32,13 +34,14 @@
             @endif
             <p class="text-[0.8rem] text-gray-400">{{ $blog->is_private ? 'Private' : 'Public' }}</p>
             <p class="text-[0.8rem]">Author: {{ $blog->user->name }}</p>
-            <form action="" id="blog-edit-container" data-id="{{ $blog->id }}">
-                <h2 contenteditable="false" class="card-title blog-edit" data-id="{{ $blog->id }}">
+            <form method="POST" action="" class="blog-edit-container" data-id="{{ $blog->id }}">
+                @csrf
+                @method('put')
+                <h2 id="edit" contenteditable="false" class="card-title blog-edit" data-id="{{ $blog->id }}">
                     {{ $blog->blog_title }}</h2>
-                <p contenteditable="false" class="blog-edit" data-id="{{ $blog->id }}">
+                <p id="edit" contenteditable="false" class="blog-edit" data-id="{{ $blog->id }}">
                     {{ $blog->blog_description }}</p>
-
-                <button id="save-edit" class="hidden btn btn-neutral">Save</button>
+                <button data-id="{{ $blog->id }}" class="save-edit mt-5 hidden btn btn-sm btn-accent">Save</button>
             </form>
         </div>
     </div>

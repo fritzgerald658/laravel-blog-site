@@ -29,3 +29,6 @@ Route::get('/dashboard/profile', [BlogController::class, 'myProfile'])->name('bl
 
 // see all post
 Route::get('/dashboard/blog-posts', [BlogController::class, 'allPost'])->name('blog.post');
+
+// udpate your post
+Route::put('/dashboard/profile/update/{id}', [BlogController::class, 'update'])->name('blog.update');

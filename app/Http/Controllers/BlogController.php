@@ -91,4 +91,26 @@ class BlogController extends Controller
 
         return view('blog-posts', ['blogs' => $blogs]);
     }
+
+
+    public function update(Request $request, $id)
+    {
+
+        $validate_data = $request->validate([
+            'blog_title' => 'required|string|max:255',
+            'blog_description' => 'required|string|max:255'
+        ]);
+
+        $blog = Blog::findOrFail($id);
+
+        $blog->blog_title = $validate_data['blog_title'];
+        $blog->blog_description = $validate_data['blog_description'];
+
+        $blog->save();
+
+        return response()->json([
+            'message' => 'Update Succesful',
+            'success' => true
+        ]);
+    }
 }

@@ -70,6 +70,39 @@ function storeBlog() {
 function activateContentEditable() {
     $(".edit-content").click(function () {
         const blogId = $(this).data("id");
+        console.log(blogId);
+        $(`.blog-edit[data-id="${blogId}"]`)
+            .attr("contenteditable", "true")
+            .focus();
+        $(".edit-content").addClass("hidden");
+        $(`.save-edit[data-id="${blogId}"]`).removeClass("hidden");
+    });
+}
+
+function updateContent() {
+    $(".blog-edit-container").on("submit", function (e) {
+        e.preventDefault();
+        const blogId = $(this).data("id");
+        const blogTitle = $('h2[data-id="' + blogId + '"]')
+            .text()
+            .trim();
+        const blogDescription = $('p[data-id="' + blogId + '"]')
+            .text()
+            .trim();
+        $.ajax({
+            type: "PUT",
+            url: "profile/update/" + blogId,
+            data: {
+                blog_title: blogTitle,
+                blog_description: blogDescription,
+                _method: "PUT", // For method spoofing
+                _token: $('meta[name="csrf-token"]').attr("content"), // CSRF token
+            },
+            success: function (response) {
+                $(".edit-content").removeClass("hidden");
+                $(".save-edit").addClass("hidden");
+            },
+        });
     });
 }
 
@@ -78,6 +111,7 @@ function execute() {
         setUpCsrfToken();
         storeBlog();
         activateContentEditable();
+        updateContent();
     });
 }
 
