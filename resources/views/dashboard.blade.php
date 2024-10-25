@@ -10,6 +10,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
         integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script> --}}
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Rethink+Sans:ital,wght@0,400..800;1,400..800&display=swap"
@@ -20,8 +22,10 @@
 
 <body>
     <x-blog.nav-bar title="Bloggerist" />
-    <x-blog.form />
-    <x-blog.blog-post :blogs="$blogs" />
+    <div class="flex flex-col gap-2 justify-center items-center">
+        <x-blog.form />
+        <x-blog.blog-post :blogs="$blogs" />
+    </div>
 </body>
 @vite('resources/js/save-blog.js')
 

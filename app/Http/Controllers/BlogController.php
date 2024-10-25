@@ -39,6 +39,7 @@ class BlogController extends Controller
                 'username' => $username,
                 'blog_title' => $blog->blog_title,
                 'blog_description' => $blog->blog_description,
+                'created_at' => $blog->created_at,
                 'created_minutes_ago' => $created_minutes_ago,
                 'created_hours_ago' => $created_hours_ago,
                 'created_days_ago' => $created_days_ago,
@@ -76,6 +77,7 @@ class BlogController extends Controller
     {
         $blogs = Blog::with('user')
             ->where('user_id', Auth::id())
+            ->orderBy('created_at', 'desc')
             ->get();
         return view('blog-profile', ['blogs' => $blogs]);
     }

@@ -2,7 +2,9 @@
 
 <div class="navbar bg-base-100">
     <div class="flex-1">
-        <span class="btn btn-ghost text-xl">{{ $title }}</a>
+        <form action="{{ route('blog.dashboard') }}" method="get">
+            <button type="submit" class="btn btn-ghost text-xl">{{ $title }}</button>
+        </form>
     </div>
     <div class="flex-none">
         <ul class="menu menu-horizontal px-1">

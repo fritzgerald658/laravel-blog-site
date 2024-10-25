@@ -19,53 +19,13 @@
 </head>
 
 <body>
-    <div class="navbar bg-base-100">
-        <div class="flex-1">
-            <a href="{{ route('blog.dashboard') }}" class="btn btn-ghost text-xl">Bloggerist</a>
+    <x-blog.nav-bar title="Bloggerist" />
+    <div class="flex flex-col gap-2 justify-center items-center">
+        <div class="flex items-start w-[90vw] md:w-[60vw] mb-2">
+            <x-blog.user-name />
         </div>
-        <div class="flex-none">
-            <ul class="menu menu-horizontal px-1">
-                <li><a>Blog</a></li>
-                <li>
-                    <details>
-                        <summary>{{ Auth::user()->name }}</summary>
-                        <ul class="bg-base-100 rounded-t-none p-2">
-                            <li><a>Profile</a></li>
-                            <li>
-                                <form method="POST" action="{{ route('logout') }}">
-                                    @csrf
-                                    <a href="route('logout')"
-                                        onclick="event.preventDefault();
-                                            this.closest('form').submit();">Log
-                                        Out</a>
-                                </form>
-                            </li>
-                        </ul>
-                    </details>
-                </li>
-            </ul>
-        </div>
+        <x-blog.blog-profile-post :blogs="$blogs" />
     </div>
-    <div>
-
-    </div>
-
-    <div id="blog-container" class=" flex flex-col justify-center items-center gap-2">
-        @foreach ($blogs as $blog)
-            <div class="card bg-neutral text-white w-[90vw] md:w-[60vw]">
-                <div class="card-body">
-                    <p class="text-[0.8rem] text-gray-400">{{ $blog->is_private ? 'Private' : 'Public' }}</p>
-                    <p class="text-[0.8rem]">Author: {{ $blog->user->name }}</p>
-                    <h2 class="card-title">{{ $blog->blog_title }}</h2>
-                    <p>{{ $blog->blog_description }}</p>
-                </div>
-            </div>
-        @endforeach
-    </div>
-
-
-
-
 </body>
 @vite('resources/js/save-blog.js')
 
