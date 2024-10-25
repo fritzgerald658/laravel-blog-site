@@ -9,29 +9,40 @@
             @if ($blog->created_at->isToday())
                 @if ($hours_ago > 0)
                     <div class="flex items-center">
-                        <p class="text-[0.6rem] text-gray-400">{{ $hours_ago }} hour{{ $hours_ago > 1 ? 's' : '' }}
-                            ago</p>
-                        <button class="btn btn-primary btn-sm edit-content" data-id="{{ $blog->id }}">Edit
-                            Post</button>
+                        <p class="text-[0.6rem] text-gray-400">{{ $minutes_ago }} min{{ $minutes_ago > 1 ? 's' : '' }}
+                            ago </p>
+
+                        <button class="btn btn-primary btn-sm cancel-edit hidden" data-id="{{ $blog->id }}">Cancel
+                            Edit</button>
+                        <x-blog.blog-dropdown :blog="$blog" />
                     </div>
                 @else
                     <div class="flex items-center">
                         <p class="text-[0.6rem] text-gray-400">{{ $minutes_ago }} min{{ $minutes_ago > 1 ? 's' : '' }}
                             ago </p>
-                        <button class="btn btn-primary btn-sm edit-content" data-id="{{ $blog->id }}">Edit
-                            Post</button>
+
                         <button class="btn btn-primary btn-sm cancel-edit hidden" data-id="{{ $blog->id }}">Cancel
                             Edit</button>
+                        <x-blog.blog-dropdown :blog="$blog" />
                     </div>
                 @endif
             @elseif ($blog->created_at->isYesterday())
                 <div class="flex items-center">
-                    <p class="text-[0.6rem] text-gray-400">{{ $blog->created_at->format('l') }}</p>
-                    <button class="btn btn-primary btn-sm edit-content" data-id="{{ $blog->id }}">Edit Post</button>
+                    <p class="text-[0.6rem] text-gray-400">{{ $minutes_ago }} min{{ $minutes_ago > 1 ? 's' : '' }}
+                        ago </p>
+
+                    <button class="btn btn-primary btn-sm cancel-edit hidden" data-id="{{ $blog->id }}">Cancel
+                        Edit</button>
+                    <x-blog.blog-dropdown :blog="$blog" />
                 </div>
             @else
                 <div class="flex items-center">
-                    <p class="text-[0.6rem] text-gray-400">{{ $blog->created_at->format('l, F, d, Y') }}</p>
+                    <p class="text-[0.6rem] text-gray-400">{{ $minutes_ago }} min{{ $minutes_ago > 1 ? 's' : '' }}
+                        ago </p>
+
+                    <button class="btn btn-primary btn-sm cancel-edit hidden" data-id="{{ $blog->id }}">Cancel
+                        Edit</button>
+                    <x-blog.blog-dropdown :blog="$blog" />
                 </div>
             @endif
             <p class="text-[0.8rem] text-gray-400">{{ $blog->is_private ? 'Private' : 'Public' }}</p>

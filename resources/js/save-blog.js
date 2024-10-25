@@ -77,6 +77,7 @@ function activateContentEditable() {
         $(".edit-content").addClass("hidden");
         $(`.save-edit[data-id="${blogId}"]`).removeClass("hidden");
         $(`.cancel-edit[data-id="${blogId}"]`).removeClass("hidden");
+        $(".dropdown").addClass("hidden");
     });
 }
 
@@ -89,6 +90,7 @@ function cancelEdit() {
         $(`.save-edit[data-id="${blogId}"]`).addClass("hidden");
         $(this).addClass("hidden");
         $(".edit-content").removeClass("hidden");
+        $(".dropdown").removeClass("hidden");
     });
 }
 
@@ -112,7 +114,12 @@ function updateContent() {
                 _token: $('meta[name="csrf-token"]').attr("content"), // CSRF token
             },
             success: function (response) {
+                $(`.blog-edit[data-id="${blogId}"]`).attr(
+                    "contenteditable",
+                    "false"
+                );
                 $(".edit-content").removeClass("hidden");
+                $(".dropdown").removeClass("hidden");
                 $(".save-edit").addClass("hidden");
                 $(".cancel-edit").addClass("hidden");
             },
