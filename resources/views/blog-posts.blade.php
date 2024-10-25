@@ -29,6 +29,7 @@
     </div>
 
 </body>
-@vite('resources/js/save-blog.js')
+{{-- @vite('resources/js/save-blog.js') --}}
+@vite('resources/js/like-blog.js')
 
 </html>

@@ -14,6 +14,7 @@ class Blog extends Model
 
     protected $fillable = [
         'user_id',
+        'likes',
         'blog_title',
         'blog_description',
         'is_private'

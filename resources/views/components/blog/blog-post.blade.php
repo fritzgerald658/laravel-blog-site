@@ -28,3 +28,4 @@
         </div>
     @endforeach
 </div>
+@vite('resources/js/like-blog.js')

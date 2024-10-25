@@ -10,8 +10,8 @@
                 @if ($blog->created_at->isToday())
                     @if ($hours_ago > 0)
                         <div class="flex items-center">
-                            <p class="text-[0.6rem] text-gray-400">{{ $minutes_ago }}
-                                min{{ $minutes_ago > 1 ? 's' : '' }}
+                            <p class="text-[0.6rem] text-gray-400">{{ $hours_ago }}
+                                hour{{ $hours_ago > 1 ? 's' : '' }}
                                 ago </p>
 
                             <button class="btn btn-primary btn-sm cancel-edit hidden" data-id="{{ $blog->id }}">Cancel
@@ -32,8 +32,7 @@
                     @endif
                 @elseif ($blog->created_at->isYesterday())
                     <div class="flex items-center">
-                        <p class="text-[0.6rem] text-gray-400">{{ $minutes_ago }} min{{ $minutes_ago > 1 ? 's' : '' }}
-                            ago </p>
+                        <p class="text-[0.6rem] text-gray-400">{{ $blog->created_at->format('l') }}</p>
 
                         <button class="btn btn-primary btn-sm cancel-edit hidden" data-id="{{ $blog->id }}">Cancel
                             Edit</button>
@@ -41,9 +40,7 @@
                     </div>
                 @else
                     <div class="flex items-center">
-                        <p class="text-[0.6rem] text-gray-400">{{ $minutes_ago }}
-                            min{{ $minutes_ago > 1 ? 's' : '' }}
-                            ago </p>
+                        <p class="text-[0.6rem] text-gray-400">{{ $blog->created_at->format('l, F, d, Y') }}</p>
 
                         <button class="btn btn-primary btn-sm cancel-edit hidden" data-id="{{ $blog->id }}">Cancel
                             Edit</button>
