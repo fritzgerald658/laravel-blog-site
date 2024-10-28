@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\TestController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -37,3 +38,9 @@ Route::delete('/dashboard/profile/delete/{id}', [BlogController::class, 'delete'
 
 // like post
 Route::post('/dashboard/blog-posts/like/', [BlogController::class, 'like'])->name('blog.like');
+
+
+Route::get('/dashboard/profile/filter/', [BlogController::class, 'filterByPrivacy'])->name('blog.filter');
+
+//test
+Route::get('/test', [TestController::class, 'getData'])->name('test');

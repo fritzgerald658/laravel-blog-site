@@ -36,6 +36,20 @@ function createBlogCard(response) {
     </div>`;
 }
 
+function filteredBlogCard(blog) {
+    // const createdAtDay = formattedCreatedAt(response);
+    return `<div class="card bg-neutral text-white w-[90vw] md:w-[60vw]" >
+        <div class="card-body">
+            <p class="text-[0.8rem] text-gray-400">${
+                blog.is_private ? "Private" : "Public"
+            }</p>
+            <p class="text-[0.8rem]">Author: ${blog.username}</p>
+            <h2 class="card-title">${blog.blog_title}</h2>
+            <p>${blog.blog_description}</p>
+        </div>
+    </div>`;
+}
+
 function storeBlog() {
     $("#add-blog").on("submit", function (e) {
         e.preventDefault();
@@ -144,6 +158,27 @@ function deleteContent() {
     });
 }
 
+function filterByPrivacy() {
+    $("#is_private").on("change", function () {
+        const privacy = $(this).val();
+        console.log(privacy);
+        $.ajax({
+            type: "GET",
+            url: "profile/filter/",
+            data: { is_private: privacy },
+            success: function (response) {
+                const blogs = response.blog;
+                $("#blog-parent-container").html("");
+                blogs.forEach(function (blog) {
+                    const card = filteredBlogCard(blog);
+                    $("#blog-parent-container").append(card);
+                    // $("#blog-parent-container").html(cardOne);
+                });
+            },
+        });
+    });
+}
+
 function execute() {
     $(document).ready(function () {
         setUpCsrfToken();
@@ -152,6 +187,7 @@ function execute() {
         updateContent();
         cancelEdit();
         deleteContent();
+        filterByPrivacy();
     });
 }
 

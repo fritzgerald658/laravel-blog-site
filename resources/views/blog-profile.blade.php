@@ -22,9 +22,12 @@
     <x-blog.nav-bar title="Bloggerist" />
     <div class="flex flex-col gap-2 justify-center items-center">
         <div class="flex items-start w-[90vw] md:w-[60vw] mb-2">
+            <x-blog.filter />
             <x-blog.user-name />
         </div>
-        <x-blog.blog-profile-post :blogs="$blogs" />
+        <div id="blog-parent-container" class=" flex flex-col gap-2">
+            <x-blog.blog-profile-post :blogs="$blogs" />
+        </div>
     </div>
 </body>
 @vite('resources/js/save-blog.js')

@@ -26,7 +26,6 @@ class BlogController extends Controller
             $validate_data['is_private'] = $request->input('is_private', false);
             $blog = Blog::create($validate_data);
 
-            // date of creation
             $created_today = $blog->created_at->isToday();
             $created_yesterday = $blog->created_at->isYesterday();
             $created_minutes_ago = floor($blog->created_at->diffInMinutes());
@@ -35,17 +34,17 @@ class BlogController extends Controller
             $created_long_ago = $blog->created_at->format('l, F, d, Y');
 
 
+
             return response()->json([
                 'is_private' => $blog->is_private,
                 'username' => $username,
                 'blog_title' => $blog->blog_title,
                 'blog_description' => $blog->blog_description,
-                'created_at' => $blog->created_at,
+                'created_today' => $created_today,
+                'created_yesterday' => $created_yesterday,
                 'created_minutes_ago' => $created_minutes_ago,
                 'created_hours_ago' => $created_hours_ago,
                 'created_days_ago' => $created_days_ago,
-                'created_today' => $created_today,
-                'created_yesterday' => $created_yesterday,
                 'created_long_ago' => $created_long_ago,
                 'success' => true
             ], 201);
@@ -121,5 +120,22 @@ class BlogController extends Controller
         $blog = Blog::find($id);
 
         $blog->delete();
+    }
+
+    public function filterByPrivacy(Request $request)
+    {
+        $query = Blog::where('user_id', Auth::id());
+        if ($request->has('is_private')) {
+            $blog = $query->where('is_private', $request->is_private)->get();
+        } else {
+            $blog = Blog::all();
+        }
+
+        $username = Auth::user()->name;
+        $blog->transform(function ($blog) use ($username) {
+            $blog->username = $username;
+            return $blog;
+        });
+        return response()->json(['blog' => $blog]);
     }
 }
